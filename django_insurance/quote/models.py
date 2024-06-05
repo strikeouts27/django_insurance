@@ -11,7 +11,7 @@ class Customer(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     address = models.CharField(max_length=50)
-    telephone_number = models.IntegerField(max_length=10)
+    telephone_number = models.IntegerField()
     email_address = models.CharField(max_length=50)
     date_of_birth = models.DateField()
     home_ownership_options = (("OWN", "Owns_Property"), ("RENT", "Rents_Property"))
@@ -44,8 +44,8 @@ class Drivers(models.Model):
         ("WOMAN", "Woman"),
         ("NONBINARY", "NonBinary"),
     )
-    gender = (models.CharField(gender_options))
-    driving_experience = (models.IntegerField(max_length=3))
+    gender = (models.CharField(gender_options,  max_length=1))
+    driving_experience = (models.IntegerField())
     job_status_options = (
         ("FULL_TIME_EMPLOYED", "Full Time Employed"),
         ("PART_TIME_EMPLOYED", "Part Time Employed"), 

@@ -18,8 +18,10 @@ Including another URLconf
 # urls.py -> django_project url
 from django.contrib import admin
 from django.urls import path, include
+from django_insurance.quote import views as quote_views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("quote/", include("quote.urls")),
+    path("quote/customer", quote_views.Contact_Information_Form),
+
 ]
