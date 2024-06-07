@@ -17,22 +17,16 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'dfwpythoneers'
-
+# # SECURITY WARNING: keep the secret key used in production secret!
+# SECRET_KEY = 'dfwpythoneers'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
-
 # Application definition
-
 INSTALLED_APPS = [
     # "web_data",
     "django.contrib.admin",
@@ -41,10 +35,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "quote",
-    "django_extensions",
-    
-
+    # "django_extensions",
+    "django_insurance.quote",
 ]
 
 MIDDLEWARE = [
@@ -57,7 +49,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "django_insurance.urls"
+ROOT_URLCONF = "django_insurance.config.urls"
 
 TEMPLATES = [
     {
@@ -75,25 +67,21 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "django_insurance.wsgi.application"
+WSGI_APPLICATION = "django_insurance.config.wsgi.application"
 
-
-# Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "HOST": "localhost",
-        # "HOST": "aws-0-us-west-1.pooler.supabase.com",
-        "NAME": "postgres",
-        "USER": "postgres",
-        "PASSWORD": "postgres",
-        # "USER": "postgres.qhvgpdhzebphqnybebkl",
-        # "PASSWORD": "dfwpythoneers",
-    }
-}
+# TODO Move this to prod or server config file
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql_psycopg2",
+#         "HOST": "localhost",
+#         # "HOST": "aws-0-us-west-1.pooler.supabase.com",
+#         "NAME": "postgres",
+#         "USER": "postgres",
+#         "PASSWORD": "postgres",
+#         # "USER": "postgres.qhvgpdhzebphqnybebkl",
+#         # "PASSWORD": "dfwpythoneers",
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -112,7 +100,6 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
