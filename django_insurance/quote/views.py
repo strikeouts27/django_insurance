@@ -5,10 +5,12 @@ from . import forms
 # need to import views in the urls.py of quote
 
 # Create your views here.
-class Contact_Information_Form(django_forms.Form):
+# MAKE A VIEW FOR MY FORM 
+# IT NEEDS TO TELL DJANGO TO FIND THAT FORM. 
+# MAKE A PATH AND A URL. 
 
-    template_name = "customer.html"
-    form_class = forms.Customer_Form 
+def formview():
+    form = forms.Contact_Information_Form
 
     # this method is called when a valid form data has been POSTed. 
     # def form_valid(self, form):
