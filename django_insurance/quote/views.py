@@ -2,15 +2,18 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django import forms as django_forms
 from . import forms 
+from django.views.generic.edit import FormView
+
 # need to import views in the urls.py of quote
 
 # Create your views here.
-# MAKE A VIEW FOR MY FORM 
-# IT NEEDS TO TELL DJANGO TO FIND THAT FORM. 
-# MAKE A PATH AND A URL. 
+class ContactFormView(FormView):
+    template_name = "customer.html"
+    form_class = forms.Customer_Form
+    # need to build success_url 
+    success_url = "/thanks/"
 
-def formview():
-    form = forms.Contact_Information_Form
+
 
     # this method is called when a valid form data has been POSTed. 
     # def form_valid(self, form):

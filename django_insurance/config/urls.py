@@ -22,6 +22,5 @@ from django_insurance.quote import views as quote_views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("quote/customer", quote_views.Contact_Information_Form),
-
+    path("quote/customer", quote_views.ContactFormView.as_view()),
 ]
