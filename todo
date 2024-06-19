@@ -2,4 +2,8 @@ make a branch -> do not merge to main until steps done.
 second establish super user
 third use the migrate command
 work on the forms
-solve smallstring error
+learning the formatting for the form fields 
+django has some crispy forms stuff that i want to see 
+one page of the forms than 
+connecting the forms to the view-> broadus mentioned that 
+
