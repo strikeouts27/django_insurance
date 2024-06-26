@@ -47,3 +47,12 @@ and inside of that template is the order to extended base.html if extendes is us
 block content and endblock tags have to be placed inside base.html somewhere to tell django where to overwrite the code with whatever is inside the block tag. 
 
 whats inside the block tags is what is being overwritten. 
+
+Createview is a way to create an object that can be stored in a database. 
+In laymans terms this is one of the ways you can create and save information in a database. 
+
+Shift Alt is a command that lets you select a column so you can make multichanges to columns. Real style! 
+
+UpdateView requires a template in order to be sent to the browser. a new url will be necessary. 
+
+If we see a FieldError that means a field is in the createview or update view that is not what the model has. one of the possible errors. 

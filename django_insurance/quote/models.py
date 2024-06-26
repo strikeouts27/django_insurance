@@ -12,6 +12,7 @@ class Customer(models.Model):
     last_name = models.CharField(max_length=50)
     address = models.CharField(max_length=50)
     telephone_number = models.IntegerField()
+    zip_code = models.CharField()
     email_address = models.CharField(max_length=50)
     date_of_birth = models.DateField()
     home_ownership_options = (("OWN", "Owns_Property"), ("RENT", "Rents_Property"))

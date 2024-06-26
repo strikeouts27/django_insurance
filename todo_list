@@ -7,3 +7,6 @@ django has some crispy forms stuff that i want to see
 one page of the forms than 
 connecting the forms to the view-> broadus mentioned that 
 
+make a homepage 
+
+path converters takes a url that you type in the browser and it tries to match that with one the urls with urls.py
