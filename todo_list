@@ -8,5 +8,8 @@ one page of the forms than
 connecting the forms to the view-> broadus mentioned that 
 
 make a homepage 
+figure out telephone fields and re enter in a test subjects information for the data base to test 
+createview and update view. 
+once we have the customer page working, than we do the same driver page. 
 
-path converters takes a url that you type in the browser and it tries to match that with one the urls with urls.py
+update view will need to pull from context. 
