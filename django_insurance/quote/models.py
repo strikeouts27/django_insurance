@@ -1,23 +1,24 @@
 from django.db import models
 
-#makemigrations and migrate from manage.py 
+# makemigrations and migrate from manage.py
 # Create your models here.
 
-# Tie everything with Quote ID 
+# Tie everything with Quote ID
 
 # customer model
 class Customer(models.Model):
-    # columns would be the variables 
+    # columns would be the variables
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
+    date_of_birth = models.DateField()
     address = models.CharField(max_length=50)
     telephone_number = models.IntegerField()
-    zip_code = models.CharField()
+    zip_code = models.CharField(default=00000)
     email_address = models.CharField(max_length=50)
-    date_of_birth = models.DateField()
     home_ownership_options = (("OWN", "Owns_Property"), ("RENT", "Rents_Property"))
     home_ownership = models.CharField(max_length=50, choices=home_ownership_options)
-# credit 
+    
+# credit
 # vehicle model
 #
 class Vehicle(models.Model): 
@@ -36,7 +37,7 @@ class Vehicle(models.Model):
     Make = models.CharField(max_length=20)
     Model = models.CharField(max_length=20)
 
-    
+
 class Drivers(models.Model): 
     Drivers_License = models.CharField(max_length=25)
     Drivers_License_State = models.TextField(max_length=25)
@@ -52,7 +53,7 @@ class Drivers(models.Model):
         ("PART_TIME_EMPLOYED", "Part Time Employed"), 
     )
 
-# many to many relationship QUOTE to PRODUCT 
+# many to many relationship QUOTE to PRODUCT
 # state of texas requirements (LIABLITY,PIP,)
 class Product(models.Model):
     product_type_options = (
@@ -64,14 +65,12 @@ class Product(models.Model):
         ("FULL_COVERAGE", "Full Coverage"),
     )
 
-# adding products to customers 
-# if not defined in a table before than you must use quotes for the model not defined. 
-# since everything is already defined already we do not need to worry about that. 
+# adding products to customers
+# if not defined in a table before than you must use quotes for the model not defined.
+# since everything is already defined already we do not need to worry about that.
 class Quote(models.Model):
     Customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     Vehicles = models.ForeignKey(Vehicle, on_delete=models.CASCADE)
     Drivers = models.ForeignKey(Drivers, on_delete=models.CASCADE)
     Reference_Number = models.CharField(max_length=25)
     Price = models.DecimalField(max_digits=7, decimal_places= 2)
-
-

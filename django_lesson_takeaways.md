@@ -58,3 +58,5 @@ UpdateView requires a template in order to be sent to the browser. a new url wil
 If we see a FieldError that means a field is in the createview or update view that is not what the model has. one of the possible errors. 
 
 path converters takes a url that you type in the browser and it tries to match that with one the urls with urls.py
+
+if i do not know what to do, try clicking around the django documentation for things. 
