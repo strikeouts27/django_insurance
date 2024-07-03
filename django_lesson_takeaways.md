@@ -60,3 +60,7 @@ If we see a FieldError that means a field is in the createview or update view th
 path converters takes a url that you type in the browser and it tries to match that with one the urls with urls.py
 
 if i do not know what to do, try clicking around the django documentation for things. 
+
+# success_url is what we use to tell django where to go upon a successful action taken by the user. 
+
+# get_success_url makes a string for success url

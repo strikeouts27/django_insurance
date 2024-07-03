@@ -1,3 +1,4 @@
+# urls.py
 """
 URL configuration for web_scrap_cloud project.
 
@@ -22,6 +23,6 @@ from django_insurance.quote import views as quote_views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("quote/customer/create/", quote_views.Customer_CreateView.as_view()),
-    path("quote/customer/<int:id>", quote_views.Customer_UpdateView.as_view()),
+    path("quote/customer/create/", quote_views.Customer_CreateView.as_view(),),
+    path("quote/customer/<int:pk>", quote_views.Customer_UpdateView.as_view(),),
 ]

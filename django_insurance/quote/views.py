@@ -1,3 +1,4 @@
+# quote/views.py
 from typing import Any
 from django.shortcuts import render
 from django.http import HttpResponse
@@ -22,8 +23,10 @@ class Customer_CreateView(CreateView):
         "date_of_birth",
         "home_ownership",
     ]
-    success_url = "customer/{id}/"
     template_name = "customer.html"
+
+    def get_success_url(self):
+        return f"/quote/customer/{self.object.pk}"
 
 
 class Customer_UpdateView(UpdateView):
@@ -39,10 +42,12 @@ class Customer_UpdateView(UpdateView):
         "home_ownership",
     ]
     template_name_suffix = "_update_form"
-    success_url = "customer/{id}/"
     template_name = "customer.html"
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
         context["test"] = "test info"
         return context
+
+    def get_success_url(self):
+        return f"/quote/customer/{self.object.pk}"
