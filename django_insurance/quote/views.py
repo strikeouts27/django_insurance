@@ -44,10 +44,5 @@ class Customer_UpdateView(UpdateView):
     template_name_suffix = "_update_form"
     template_name = "customer.html"
 
-    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
-        context = super().get_context_data(**kwargs)
-        context["test"] = "test info"
-        return context
-
     def get_success_url(self):
         return f"/quote/customer/{self.object.pk}"
