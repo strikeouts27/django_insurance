@@ -39,7 +39,7 @@ class Customer_UpdateView(UpdateView):
         "home_ownership",
     ]
     template_name_suffix = "_update_form"
-    success_url = "customer/{pk}/"
+    success_url = "customer/{id}/"
     template_name = "customer.html"
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
