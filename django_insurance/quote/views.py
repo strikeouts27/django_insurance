@@ -1,3 +1,4 @@
+from typing import Any
 from django.shortcuts import render
 from django.http import HttpResponse
 from django import forms as django_forms
@@ -7,11 +8,7 @@ from django.views.generic.edit import FormView, CreateView, UpdateView, DeleteVi
 # need to import views in the urls.py of quote
 
 # Create your views here.
-class ContactFormView(FormView):
-    template_name = "customer.html"
-    form_class = forms.Customer_Form
-    # need to build success_url 
-    success_url = "customer"
+
 
 class Customer_CreateView(CreateView):
     model = models.Customer
@@ -25,17 +22,18 @@ class Customer_CreateView(CreateView):
         "date_of_birth",
         "home_ownership",
     ]
-    success_url = "customer/{pk}/"
+    success_url = "customer/{id}/"
     template_name = "customer.html"
 
-class Customer_UpdateView(UpdateView): 
+
+class Customer_UpdateView(UpdateView):
     model = models.Customer
     fields = [
         "first_name",
         "last_name",
         "address",
-        "telephone_number",
         "zip_code",
+        "telephone_number",
         "email_address",
         "date_of_birth",
         "home_ownership",
@@ -43,3 +41,8 @@ class Customer_UpdateView(UpdateView):
     template_name_suffix = "_update_form"
     success_url = "customer/{pk}/"
     template_name = "customer.html"
+
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context["test"] = "test info"
+        return context
