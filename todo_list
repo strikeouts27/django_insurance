@@ -13,3 +13,17 @@ createview and update view.
 once we have the customer page working, than we do the same driver page. 
 
 update view will need to pull from context. 
+
+We need to figure out how to make a separate page for the mailing address. 
+How would we adjust our models for that? 
+What do we do when the address are different vs when they are the same. 
+
+-When the VIN number is entered, somehow Django will need to communicate with a database and pull up the VIN. 
+-> Link to the NHTSA website where they get the vin. 
+
+-> https://vpic.nhtsa.dot.gov/decoder/Decoder
+
+
+Maybe that is too fancy for this project, but we are here to impress recuriters. A question for the Pythoneers how to grab these values. 
+
+-Conditionals for VIN number outcomes for templates. 

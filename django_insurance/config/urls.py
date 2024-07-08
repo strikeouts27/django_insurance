@@ -25,4 +25,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("quote/customer/create/", quote_views.Customer_CreateView.as_view(),),
     path("quote/customer/<int:pk>", quote_views.Customer_UpdateView.as_view(),),
+    
 ]
