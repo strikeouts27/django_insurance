@@ -36,11 +36,46 @@ class Vehicle(models.Model):
         ("BUSINESS", "Business"),
         ("COMMERCIAL", "Commercial"),
     )
+    # Note: Use for ride sharing ideally should be like a check box 
+    Used_For_Ride_Sharing = models.CharField(max_length = 10, blank=True)
     Usage_Type = models.CharField(choices=Usage_Type_Options, max_length=11, blank=True)
-    Annual_Mileage = models.IntegerField()
+    
+    Annual_Mileage_Options = (
+        ("0-3,999", "0-3,999"), 
+        ("4,000-5,999","4,000-5,999"),
+        ("6,000-7,999", "6,000-7,999"), 
+        ("8,000-9,999", "8,000-9,999"), 
+        ("10,000 - 11,999", "10,000-11,999"), 
+        ("12,000 - 13,999", "12,000 - 13,999"), 
+        ("14,000 - 15,999", "14,000 - 15,999"), 
+        ("16,000 - 17,999", "16,000 - 17,999"), 
+        ("18,000 - 19,999", "18,000 - 19,999"), 
+        ("20,000 - 21,999", "20,000 - 21,999"), 
+    )
+    
+    Annual_Mileage = models.CharField(choices=Annual_Mileage_Options)
     Year = models.IntegerField(max_length=4)
     Make = models.CharField(max_length=30)
     Model = models.CharField(max_length=30)
+    
+    Ownership_Options = (
+        ("FINANCE", "Finance"),
+        ("OWN", "Own"),  
+        ("LEASE", "Lease"), 
+    )
+    
+    Vehicle_Ownership = models.CharField(choices=Ownership_Options, max_length=11)
+    
+    Vehicle_Ownership_Timeframe_Options = (
+        ("LESS THAN 1 MONTH", "Less than 1 month"), 
+        ("1 TO 6 MONTHS", "1 to 6 months"), 
+        ("6 MONTHS TO 1 YEAR", "6 months to 1 year"), 
+        ("1 YEAR TO 3 YEARS", "1 year to 3 years"), 
+        ("3 YEARS TO 5 YEARS", "3 years to 5 years"), 
+        ("5 YEARS OR MORE", "5 years or more"),
+    )
+    
+    Vehicle_Ownership_Timeframe = models.CharField()
 
 
 class Drivers(models.Model):
