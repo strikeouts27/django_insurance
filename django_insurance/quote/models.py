@@ -40,6 +40,8 @@ class Vehicle(models.Model):
     Used_For_Ride_Sharing = models.CharField(max_length = 10, blank=True)
     Usage_Type = models.CharField(choices=Usage_Type_Options, max_length=11, blank=True)
     
+    # Updated on 7/8/2024
+    # Note - reason for update was for better form in the model, therefore the highest option (for now) is 20,000 or more    
     Annual_Mileage_Options = (
         ("0-3,999", "0-3,999"), 
         ("4,000-5,999","4,000-5,999"),
@@ -50,7 +52,7 @@ class Vehicle(models.Model):
         ("14,000 - 15,999", "14,000 - 15,999"), 
         ("16,000 - 17,999", "16,000 - 17,999"), 
         ("18,000 - 19,999", "18,000 - 19,999"), 
-        ("20,000 - 21,999", "20,000 - 21,999"), 
+        ("20,000 or more", "20,000 or more"), 
     )
     
     Annual_Mileage = models.CharField(choices=Annual_Mileage_Options)
