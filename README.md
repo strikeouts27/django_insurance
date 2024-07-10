@@ -29,3 +29,4 @@ The virtual enviornment deals with enviornment variables.
 
 # Note you cannot have spaces after variable. 
 EXPORT DJANGO_SETTINGS_MODULE= 
+

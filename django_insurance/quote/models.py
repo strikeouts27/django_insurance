@@ -1,4 +1,5 @@
 from django.db import models
+from django.views.generic import TemplateView
 
 # makemigrations and migrate from manage.py
 # Create your models here.
@@ -232,3 +233,5 @@ class Quote(models.Model):
     Drivers = models.ForeignKey(Drivers, on_delete=models.CASCADE)
     Reference_Number = models.CharField(max_length=30)
     Price = models.DecimalField(max_digits=7, decimal_places=2)
+
+

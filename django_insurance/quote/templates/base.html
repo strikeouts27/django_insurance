@@ -1,10 +1,15 @@
+<!-- base.html -->
+{% load static %}
+
 <!DOCTYPE html>
 <html>
   <head>
     <h1>Welcome to Django Insurance!</h1>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
   </head>
   <body>
     {% include 'navbar.html' %} 
     {% block page_content %} {% endblock %}
+    {% block content %} {% endblock content %}
   </body>
 </html>
