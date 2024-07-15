@@ -1,5 +1,4 @@
 <!-- customer.html -->
- 
 {% extends "base.html" %} 
 
 <!-- the extra_script block has been added so phone number is in (###) ###- #### format on the client side-->
@@ -12,13 +11,11 @@
   <script>
     $(document).ready(function() {
             $('#id_phone_number').on('input', function() {
-                var phoneNumber = $(this).val().replace(/\D/g, ''); 
-               
+                var phoneNumber = $(this).val().replace(/\D/g, '');                
                 
                 if (phoneNumber.length === 10) {
                     phoneNumber = phoneNumber.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
-                }
-               
+                }               
                 
                 $(this).val(phoneNumber);
             });
