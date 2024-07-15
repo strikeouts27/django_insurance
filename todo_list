@@ -1,0 +1,55 @@
+make a branch -> do not merge to main until steps done.
+second establish super user
+third use the migrate command
+work on the forms
+learning the formatting for the form fields 
+django has some crispy forms stuff that i want to see 
+one page of the forms than 
+connecting the forms to the view-> broadus mentioned that 
+
+make a homepage 
+figure out telephone fields and re enter in a test subjects information for the data base to test 
+createview and update view. 
+once we have the customer page working, than we do the same driver page. 
+
+update view will need to pull from context. 
+
+
+We need to figure out how to make a separate page for the mailing address. 
+How would we adjust our models for that? 
+What do we do when the address are different vs when they are the same. 
+
+-When the VIN number is entered, somehow Django will need to communicate with a database and pull up the VIN. 
+
+We need to figure out how to make a separate page for the mailing address. 
+How would we adjust our models for that? 
+What do we do when the address are different vs when they are the same. 
+
+-When the VIN number is entered, somehow Django will need to communicate with a database and pull up the VIN. 
+-> Link to the NHTSA website where they get the vin. 
+
+NHTSA VIN ON OUR WEBSITE 
+-> https://vpic.nhtsa.dot.gov/decoder/
+
+
+Maybe that is too fancy for this project, but we are here to impress recuriters. A question for the Pythoneers how to grab these values. 
+
+-Conditionals for VIN number outcomes for templates. 
+IF VIN WORKS OUT THAN DISPLAY YEAR MAKE AND MODEL 
+IF NOT, THAN YOU CAN USE DROP DOWN ARROWS AND SELECT YEAR MAKE AND MODEL. 
+-BODY TYPE FOR VEHICLE 
+
+checkbox for ridesharing 
+
+what should an insurance website homepage have? 
+
+Banner and a navbar 
+welcome message 
+picture of a car 
+picture of django 
+get a quote button 
+Log in Hyperlink 
+Discount information 
+A search by zip code to show which state you are quoting in 
+Bottom hyperlinks to community, about us, other produdct lines, etc
+# path("django_insurance/config", include("config.urls")), we need a way to include the urls of config

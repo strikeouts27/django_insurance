@@ -1,7 +1,7 @@
 # django_insurance
  Data from Postgres
 
-
+An activated virtual enviornment with what is listed in requirements.txt is necessary! 
 
 ## Create your settings file
 
@@ -15,3 +15,18 @@ print(secrets.token_urlsafe(80))
 ```
 
 If you look at `manage.py`, you'll notice that the Django settings file can be controlled by an environment variable. How you manage that is up to you, but I personally find it convenient to add it to the venv activate.bat script. You can do this with `set DJANGO_SETTINGS_MODULE=django_insurance.config.settings.local_settings`. Note that any changes you make to `activate.bat` won't be reflected until you re-run the script. To do this, run `deactivate`, then `env\Scripts\activate.bat`
+
+How to set an enviornment variable-> EXPORT VARIABLE=value 
+
+Three ways to do set up envionrment variable 
+
+EXPORT is a bash command. Its set variable for the life of current session. 
+when you open up a terminal you have your enviornment variables load. 
+if you make changes to the enviornment varialbes in one terminal session that does NOT mean that they are active in the other terminals of the project. 
+
+The virtual enviornment deals with enviornment variables. 
+
+
+# Note you cannot have spaces after variable. 
+EXPORT DJANGO_SETTINGS_MODULE= 
+

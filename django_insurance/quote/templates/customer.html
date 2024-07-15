@@ -1,32 +1,32 @@
-<!DOCTYPE html>
-<html>
-{% extends "base.html" %}
-<head></head>
+<!-- customer.html -->
+ 
+{% extends "base.html" %} 
 
-<body>
+<!-- the extra_script block has been added so phone number is in (###) ###- #### format on the client side-->
 
-<form method="post">{% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Send message">
+{% block extra_script %}
+  
+  <!--Note: jQuery may be needed for this to work  -->>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+            $('#id_phone_number').on('input', function() {
+                var phoneNumber = $(this).val().replace(/\D/g, ''); 
+                 if (phoneNumber.length === 10) {
+                    phoneNumber = phoneNumber.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
+                }
+               $(this).val(phoneNumber);
+            });
+        });
+  </script> 
+{% endblock %}
+{% block page_content %}
+
+<form method="post">
+  {% csrf_token %} {{ form.as_p }}
+  <input type="submit" value="Save" />
 </form>
 
-</body>
+{% endblock %}
 
-    <h1>Hello, World!</h1>
-
-    <h6>What is your first name?</h6> 
-    <h6>What is your last name?</h6>
-    <h6>What is your address?</h6>
-    <h6>What is your zip code?</h6>
-    <!-- need python to validate responses. regex -->
-    <!-- Fill text boxes for these questions. We need to figure out how to validate the answers.--> 
-    <h6>What is your telephone number?</h6>
-    <!-- input () with dashes, and validation -->
-
-    <h6>What is your email address? </h6>
-    <h6>Date of Birth?</h6>
-    <h6>What is your age</h6> 
-
-
-
-</html>

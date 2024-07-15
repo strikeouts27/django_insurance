@@ -1,3 +1,4 @@
+# urls.py
 """
 URL configuration for web_scrap_cloud project.
 
@@ -18,10 +19,17 @@ Including another URLconf
 # urls.py -> django_project url
 from django.contrib import admin
 from django.urls import path, include
+from ..quote.views import HomePageView
 from django_insurance.quote import views as quote_views
+from django.views.generic import TemplateView
+from ..quote.views import AboutPageView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("quote/customer", quote_views.Contact_Information_Form),
-
+    path("quote/customer/create/", quote_views.Customer_CreateView.as_view(),),
+    path("quote/customer/<int:pk>", quote_views.Customer_UpdateView.as_view(),), 
+    path('', HomePageView.as_view(), name='home'), 
+    path("about/", AboutPageView.as_view(), name="about"), 
+    # path("django_insurance/urls", include("config.urls")), # I need some way to include the urls in config? Or maybe urls in quotes. quotes is more likely
+    
 ]
