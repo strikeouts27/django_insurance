@@ -13,11 +13,11 @@ class Customer(models.Model):
     first_name = models.CharField(max_length=50)
     middle_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
-    suffix = models.CharField(blank=True)
-    apt_number = models.CharField(blank=True)
+    suffix = models.CharField(blank=True, max_length=10)
+    apt_number = models.CharField(blank=True, max_length=10)
     date_of_birth = models.DateField()
     address = models.CharField(max_length=50)
-    zip_code = models.CharField(default=00000)
+    zip_code = models.CharField(default=00000, max_length=10)
     telephone_number = models.IntegerField(max_length=14)
     email_address = models.CharField(max_length=50)
     home_ownership_options = (("OWN", "Owns_Property"), ("RENT", "Rents_Property"))
@@ -54,7 +54,7 @@ class Vehicle(models.Model):
         ("20,000 OR MORE", "20,000 or more"), 
     )
     
-    Annual_Mileage = models.CharField(choices=Annual_Mileage_Options)
+    Annual_Mileage = models.CharField(choices=Annual_Mileage_Options, max_length=15)
     Year = models.IntegerField(max_length=4)
     Make = models.CharField(max_length=30)
     Model = models.CharField(max_length=30)
@@ -76,7 +76,7 @@ class Vehicle(models.Model):
         ("5 YEARS OR MORE", "5 years or more"),
     )
     
-    Vehicle_Ownership_Timeframe = models.CharField()
+    Vehicle_Ownership_Timeframe = models.CharField(max_length=15)
 
 
 class Drivers(models.Model):
