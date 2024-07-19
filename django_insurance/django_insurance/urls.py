@@ -20,14 +20,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
-from quote.views import AboutPageView, HomePageView, Customer_CreateView, Customer_UpdateView
+from quote.views import AboutPageView, Customer_CreateView, Customer_UpdateView, DriverView, HomePageView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("quote/customer/create/", Customer_CreateView.as_view(),),
+    path("quote/customer/create/", Customer_CreateView.as_view(), name='customer'),
     path("quote/customer/<int:pk>", Customer_UpdateView.as_view(),),
-    path('', HomePageView.as_view(), name='home'),
+    path("", HomePageView.as_view(), name='home'),
     path("about/", AboutPageView.as_view(), name="about"),
+    path("driver/",  DriverView.as_view(), name= "driver"), 
     # path("django_insurance/urls", include("config.urls")), # I need some way to include the urls in config? Or maybe urls in quotes. quotes is more likely
     
 ]

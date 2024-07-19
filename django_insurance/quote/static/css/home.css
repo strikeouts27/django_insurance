@@ -1,4 +1,4 @@
-/* static/css/base.css */
+/* static/css/home.css */
 header h1 a {
 color: white;
 }
@@ -7,3 +7,6 @@ body {
     background-color: green;
 }
 
+p {
+    color:white;
+}

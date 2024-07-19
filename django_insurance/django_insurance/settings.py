@@ -124,6 +124,9 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
+# added by Andrew Chat GPT to serve static folders. 
+STATICFILE_DIRS = [BASE_DIR / "static"]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
