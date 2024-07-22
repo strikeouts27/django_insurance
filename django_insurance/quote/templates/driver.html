@@ -1,16 +1,13 @@
-<!-- driver.html -->
 {% extends "base.html" %} 
 {% block page_content %}
+<!-- start driver form -->
 
 <form method="post">
   {% csrf_token %} {{ form.as_p }}
   <input type="submit" value="Send message" />
 </form>
-
-{% endblock page_content %}
-
+<!-- end driver form -->
 <!-- need python to validate responses. regex -->
 <!-- Fill text boxes for these questions. We need to figure out how to validate the answers.-->
 <!-- input () with dashes, and validation -->
-
-{% endblock %}
+{% endblock page_content %}

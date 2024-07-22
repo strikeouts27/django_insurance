@@ -2,3 +2,4 @@ __pycache__
 env/
 django_insurance/config/settings/local_settings.py
 venv
+*.sqlite3

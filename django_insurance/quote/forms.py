@@ -39,7 +39,7 @@ class Vehicle_Form(forms.Form):
     )
 
 
-class Driver_Form(forms.Form):
+class DriverForm(forms.Form):
 
     Usage_Type = forms.CharField(
         required=True,
