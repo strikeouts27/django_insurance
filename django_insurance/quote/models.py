@@ -18,7 +18,7 @@ class Customer(models.Model):
     date_of_birth = models.DateField()
     address = models.CharField(max_length=50)
     zip_code = models.CharField(default=00000, max_length=10)
-    telephone_number = models.IntegerField(max_length=14)
+    telephone_number = models.IntegerField()
     email_address = models.CharField(max_length=50)
     home_ownership_options = (("OWN", "Owns_Property"), ("RENT", "Rents_Property"))
     home_ownership = models.CharField(max_length=50, choices=home_ownership_options)
@@ -55,7 +55,7 @@ class Vehicle(models.Model):
     )
     
     Annual_Mileage = models.CharField(choices=Annual_Mileage_Options, max_length=15)
-    Year = models.IntegerField(max_length=4)
+    Year = models.IntegerField()
     Make = models.CharField(max_length=30)
     Model = models.CharField(max_length=30)
     

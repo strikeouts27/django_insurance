@@ -2,15 +2,12 @@
 from typing import Any
 from django.shortcuts import render
 from django.http import HttpResponse
-from django import forms as django_forms
-from . import forms, models
+from quote import models
 from django.views.generic.edit import FormView, CreateView, UpdateView, DeleteView
 from django.views.generic import TemplateView
+from quote.forms import DriverForm
 
 # need to import views in the urls.py of quote
-
-# Create your views here.
-
 
 class Customer_CreateView(CreateView):
     model = models.Customer
@@ -60,6 +57,20 @@ class HomePageView(TemplateView):
 class AboutPageView(TemplateView): 
     template_name = "about.html"
 
-class DriverView(TemplateView): 
-    template_name = "driver.html"
-    
+# class DriverView(FormView):
+#     template_name = "driver.html"
+
+
+def driver_form(request):
+    if request.method == 'POST':
+        form = DriverForm(request.POST)
+        print(f'form valid? : {form.is_valid()}')
+        # process form data
+    form = DriverForm()
+    return render(
+        request,
+        'driver.html',
+        {
+            'form': form,
+        }
+    )
