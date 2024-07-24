@@ -1,11 +1,13 @@
 # quote/views.py
+
 from typing import Any
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpRequest, HttpResponse
 from quote import models
 from django.views.generic.edit import FormView, CreateView, UpdateView, DeleteView
 from django.views.generic import TemplateView
 from quote.forms import DriverForm
+import random 
 
 # need to import views in the urls.py of quote
 
@@ -25,8 +27,22 @@ class Customer_CreateView(CreateView):
 
     def get_success_url(self):
         return f"/quote/customer/{self.object.pk}"
+    
+    # we need to utilize the setup() function in createview. we need to add functionality 
+    # to setup to create a quote_id for django to know that this quote is for this customer. 
 
+    def setup(self, request: HttpRequest, *args: Any, **kwargs: Any) -> None:  
+        self.quote_id = create_quote_id()
+        return super().setup(request, *args, **kwargs)
 
+    # each view has its own context
+    # in order to change context in django we need the get_context function 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['quote_id'] = self.quote_id
+        return context
+    
+    
 class Customer_UpdateView(UpdateView):
     model = models.Customer
     fields = [
@@ -74,3 +90,11 @@ def driver_form(request):
             'form': form,
         }
     )
+
+def create_quote_id():
+    # Start the string with "d" and "j"
+    result = "dj"
+    # Append 6 randomly selected numbers from the range 1 to 10
+    for _ in range(6):
+        result += str(random.randint(1, 10))
+    return result
