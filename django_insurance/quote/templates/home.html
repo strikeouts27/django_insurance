@@ -1,11 +1,10 @@
 <!-- templates/home.html -->
 {% extends "base.html" %}
 
-{% block content %}
+{% block page_content %}
     <title>Home Page</title>
     <h1>Django Insurance</h1>
     <p>Welcome to the Django Insurance Home page!</p>
-
-    <a href="{% url 'customer' %}"> Start Quote </a> 
-     
-{% endblock content %}
+    <button><a href="{% url 'customer' %}"> Start Quote </a></button> 
+    
+{% endblock page_content %}
