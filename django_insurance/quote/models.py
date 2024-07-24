@@ -232,4 +232,5 @@ class Quote(models.Model):
     Reference_Number = models.CharField(max_length=30)
     Price = models.DecimalField(max_digits=7, decimal_places=2)
 
+# url for vehcile we want to build a vehicle or for this quote 
 
