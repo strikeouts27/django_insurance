@@ -11,7 +11,7 @@ from django.views.generic import TemplateView
 class Customer(models.Model):
     # columns would be the variables
     first_name = models.CharField(max_length=50)
-    middle_name = models.CharField(max_length=50)
+    middle_name = models.CharField(max_length=50, blank=True)
     last_name = models.CharField(max_length=50)
     suffix = models.CharField(blank=True, max_length=10)
     apt_number = models.CharField(blank=True, max_length=10)
@@ -79,7 +79,7 @@ class Vehicle(models.Model):
     Vehicle_Ownership_Timeframe = models.CharField(max_length=15)
 
 
-class Drivers(models.Model):
+class Driver(models.Model):
 
     Driver_First_Name = models.CharField(max_length=50)
     Driver_Last_Name = models.CharField(max_length=50)
@@ -227,8 +227,8 @@ class Product(models.Model):
 # since everything is already defined already we do not need to worry about that.
 class Quote(models.Model):
     Customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    Vehicles = models.ForeignKey(Vehicle, on_delete=models.CASCADE)
-    Drivers = models.ForeignKey(Drivers, on_delete=models.CASCADE)
+    Vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE)
+    Driver = models.ForeignKey(Driver, on_delete=models.CASCADE)
     Reference_Number = models.CharField(max_length=30)
     Price = models.DecimalField(max_digits=7, decimal_places=2)
 
