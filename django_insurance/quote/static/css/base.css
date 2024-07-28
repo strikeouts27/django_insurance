@@ -1,9 +1,2 @@
-/* static/css/base.css */
-header h1 a {
-color: white;
-}
-/* temp check to validate. -> eddy */
-body {
-    background-color: green;
-}
-
+html, body { height: 100%; margin: 0; box-sizing: border-box; background-color: #00416A;}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
