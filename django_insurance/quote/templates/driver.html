@@ -1,11 +1,17 @@
-{% extends "base.html" %} 
-{% block page_content %}
+{% extends "base.html" %} {% block page_content %}
 <!-- start driver form -->
-
-<form method="post">
-  {% csrf_token %} {{ form.as_p }}
-  <input type="submit" value="Send message" />
-</form>
+<div class="hero-body has-text-centered">
+    <p>Your quote id is: {{ quote_id }}</p>
+    <form method="post">
+        {% csrf_token %} {{ form.as_p }}
+        <input
+            class="button is-light"
+            type="submit"
+            onclick="alert('Try again Bob.')"
+            value="Next"
+        />
+    </form>
+</div>
 <!-- end driver form -->
 <!-- need python to validate responses. regex -->
 <!-- Fill text boxes for these questions. We need to figure out how to validate the answers.-->

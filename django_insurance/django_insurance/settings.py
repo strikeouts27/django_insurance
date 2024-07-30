@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-import os
 # from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -26,16 +25,23 @@ SECRET_KEY = 'dfwpythoneers'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+ALLOWED_HOSTS = [
+    '.ngrok-free.app',
+    'insurance.eddyizm.com',
+    'localhost',
+    '127.0.0.1',
+]
+# ngrok only for developing
+CSRF_TRUSTED_ORIGINS = ['https://*.ngrok-free.app', 'https://insurance.eddyizm.com']
+
 # Application definition
 INSTALLED_APPS = [
-    # "web_data",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # "django_extensions",
     "quote",
 ]
 
