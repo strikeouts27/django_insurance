@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.http import HttpRequest
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import TemplateView
-from quote.forms import DriverForm
+from quote.forms import DriverForm, Customer_Form
 from quote import models
 import random
 
@@ -23,6 +23,7 @@ class Customer_CreateView(CreateView):
         "email_address",
         "date_of_birth",
         "home_ownership",
+        "quote_id"
     ]
     template_name = "customer.html"
 
@@ -98,6 +99,7 @@ def driver_form(request):
         if form.is_valid():
             # form and model are not in sync. NEEDS WORK!
             print(form.cleaned_data['Usage_Type'])
+            print(f'this is the quote id from the http request: {form.cleaned_data['quote_id']}')
             # process form data
     form = DriverForm()
     return render(
