@@ -22,10 +22,13 @@ class Customer_CreateView(CreateView):
         "zip_code",
         "email_address",
         "date_of_birth",
-        "home_ownership",
-        "quote_id"
+        "home_ownership"
     ]
     template_name = "customer.html"
+
+    def form_valid(self, form):
+        form.instance.quote_id = self.quote_id
+        return super().form_valid(form)
 
     def get_success_url(self):
         return "/driver"
