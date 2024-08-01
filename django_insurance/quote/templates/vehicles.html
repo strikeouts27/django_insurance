@@ -1,10 +1,15 @@
-<!-- vehicles.html -->
-{% extends "base.html" %} 
-{% block page_content %}
-
-<form method="post">
-  {% csrf_token %} {{ form.as_p }}
-  <input type="submit" value="Send message" />
-</form>
-
-{% endblock %}
+{% extends "base.html" %} {% block page_content %}
+<!-- start vehicle form -->
+<div class="hero-body has-text-centered">
+  <p>Your quote id is: {{ quote_id }}</p>
+  <form method="post">
+      {% csrf_token %} {{ form.as_p }}
+      <input
+          class="button is-light"
+          type="submit"
+          value="Next"
+      />
+  </form>
+</div>
+<!-- end vehicle form -->
+{% endblock page_content %}
