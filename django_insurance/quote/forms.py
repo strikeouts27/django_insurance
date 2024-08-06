@@ -1,4 +1,5 @@
 from django import forms
+from quote.models import Driver, Vehicle
 
 
 class Customer_Form(forms.Form):
@@ -29,37 +30,43 @@ class Customer_Form(forms.Form):
     home_ownership = forms.CharField(label="Do you own or rent your home?")
 
 
-class Vehicle_Form(forms.Form):
-    Vehicle_Identification_Number = forms.IntegerField(
-        required=True,
-        label="What is the vehicle identification number for your vehicle?",
-    )
-    Annual_Mileage = forms.IntegerField(
-        required=True, label="How many miles do you drive each year?"
+class VehicleForm(forms.ModelForm):
+    class Meta:
+        model = Vehicle
+        fields = [
+            "Vehicle_Identification_Number",
+            "Usage_Type",
+            "Year",
+            "Make",
+            "Model",
+        ]
+
+    quote_id = forms.CharField(
+        widget=forms.HiddenInput(),
+        required=False
     )
 
 
-class DriverForm(forms.Form):
+class DriverForm(forms.ModelForm):
+    class Meta:
+        model = Driver
+        fields = [
+            "driver_first_name",
+            "driver_last_name",
+            "driver_relation",
+            "drivers_license_number",
+            "drivers_license_status",
+            'drivers_license_state',
+            "date_of_issuance",
+            "job_status",
+            "gender",
+            "education",
+        ]
+        widgets = {
+            'date_of_issuance': forms.widgets.DateInput(attrs={'type': 'date'})
+        }
 
-    Usage_Type = forms.CharField(
-        required=True,
-        label="Will this vehicle be used for work, school, pleasure, or business?",
-    )
-    Driver_First_Name = forms.CharField(
-        required=True, label="What is your drivers first name?"
-    )
-    Driver_Last_Name = forms.CharField(
-        required=True, label="What is your drivers last name?"
-    )
-    Driver_Relation = forms.CharField(
-        required=True, label="What is the relationship does this driver have to you?"
-    )
-    US_State = forms.CharField(
-        required=True, label="In what US state do you have your license?"
-    )
-    Drivers_License_Number = forms.IntegerField(
-        required=True, label="What is your drivers license number?"
-    )
-    Drivers_License_Status = forms.CharField(
-        required=True, label="What is your current status of your drivers license?"
+    quote_id = forms.CharField(
+        widget=forms.HiddenInput(),
+        required=False
     )

@@ -1,5 +1,5 @@
 from django.db import models
-from django.views.generic import TemplateView
+from quote import constants
 
 # makemigrations and migrate from manage.py
 # Create your models here.
@@ -83,134 +83,19 @@ class Vehicle(models.Model):
 
 
 class Driver(models.Model):
-
-    Driver_First_Name = models.CharField(max_length=50)
-    Driver_Last_Name = models.CharField(max_length=50)
-    driver_relation_options = (
-        (
-            ("SELF, Self"),
-            ("GRANDFATHER", "Grandfather"),
-            ("GRANDMOTHER", "Grandmother"),
-            ("SPOUSE", "Spouse"),
-            ("DOMESTIC PARTNER", "Domestic Partner"),
-            ("SON", "Son"),
-            ("DAUGHTER", "Daughter"),
-            ("FATHER", "Father"),
-            ("MOTHER", "Mother"), 
-            ("FATHER IN LAW", "Father in law"), 
-            ("MOTHER IN LAW", "Mother in Law"),
-            ("FIANCE", "Fiance"),
-            ("FRIEND", "Friend"),
-            ("OTHER", "Other"),
-        ),
-    )
-
-    Driver_Relation = models.CharField(driver_relation_options, max_length=50)
+    driver_first_name = models.CharField(max_length=50)
+    driver_last_name = models.CharField(max_length=50)
+    driver_relation = models.CharField(max_length=16, choices=constants.DRIVER_RELATION_OPTIONS, default="SELF")
     quote_id = models.CharField(max_length=8, blank=True)
-    state_options = (
-        ("AL", "Alabama"),
-        ("AK", "Alaska"),
-        ("AZ", "Arizona"),
-        ("AR", "Arkansas"),
-        ("CA", "California"),
-        ("CO", "Colorado"),
-        ("CT", "Connecticut"),
-        ("DC", "Washington D.C."),
-        ("DE", "Delaware"),
-        ("FL", "Florida"),
-        ("GA", "Georgia"),
-        ("HI", "Hawaii"),
-        ("ID", "Idaho"),
-        ("IL", "Illinois"),
-        ("IN", "Indiana"),
-        ("IA", "Iowa"),
-        ("KS", "Kansas"),
-        ("LA", "Louisiana"),
-        ("ME", "Maine"),
-        ("MD", "Maryland"),
-        ("MA", "Massachusetts"),
-        ("MI", "Michigan"),
-        ("MN", "Minnesota"),
-        ("MS", "Mississippi"),
-        ("MO", "Missouri"),
-        ("MT", "Montana"),
-        ("NE", "Nebraska"),
-        ("NV", "Nevada"),
-        ("NH", "New Hampshire"),
-        ("NJ", "New Jersey"),
-        ("NM", "New Mexico"),
-        ("NY", "New York"),
-        ("NC", "North Carolina"),
-        ("ND", "North Dakota"),
-        ("OH", "Ohio"),
-        ("OK", "Oklahoma"),
-        ("OR", "Oregon"),
-        ("PA", "Pennsylvania"),
-        ("PR", "Puerto Rico"),
-        ("RI", "Rhode Island"),
-        ("SC", "South Carolina"),
-        ("SD", "South Dakota"),
-        ("TN", "Tennessee"),
-        ("TX", "Texas"),
-        ("UT", "Utah"),
-        ("VT", "Vermont"),
-        ("VA", "Virginia"),
-        ("WA", "Washington"),
-        ("WI", "Wisconsin"),
-        ("WY", "Wyoming"),
-    )
-
-    Drivers_License_State = models.CharField(state_options, max_length=30)
-
-    Drivers_License_Number = models.CharField(max_length=30)
-
-    drivers_license_options = (
-        ("ACTIVE LICENSE", "Active License"),
-        ("LEARNERS PERMIT", "Permit License"),
-        ("COMMERCIAL LICENSE", "Commerical License"),
-        ("FOREIGN LICENSE", "Foreign License"),
-        ("INTERNATION LICENSE", "International License"),
-        ("SUSPENDED LICENSE", "Suspended License"),
-        ("EXPIRED LICENSE", "Expired License"),
-        ("NOT LICENSED TO DRIVE", "Not licensed to drive"),
-    )
-    Drivers_License_Status = models.CharField(drivers_license_options, max_length=50)
-
-    gender_options = (
-        ("MALE", "Male"),
-        ("FEMALE", "Female"),
-        ("NONBINARY", "NonBinary"),
-        ("NOANSWER", "Prefer Not to Answer"),
-    )
-    gender = models.CharField(gender_options, max_length=30)
-
+    drivers_license_state = models.CharField(choices=constants.STATE_OPTIONS, max_length=30)
+    drivers_license_number = models.CharField(max_length=30)
+    drivers_license_status = models.CharField(choices=constants.DRIVERS_LICENSE_STATUS, max_length=50)
+    gender = models.CharField(choices=constants.GENDER_OPTIONS, max_length=30)
     date_of_issuance = models.DateField()
-
-    job_status_options = (
-        ("FULL_TIME_EMPLOYED", "Full Time Employed"),
-        ("PART_TIME_EMPLOYED", "Part Time Employed"),
-        ("STUDENT", "Student"),
-        ("HOMEMAKER", "Homemaker"),
-        ("UNEMPLOYED", "Unemployed"),
-    )
-
-    job_status = models.CharField(job_status_options, max_length=50)
-
-    education_options = (
-        ("LESS THAN HIGHSCHOOL", "Less than highschool"),
-        ("HIGHSCHOOL", "Highschool"),
-        ("VOCATIONAL", "Vocational"),
-        ("ASSOCIATE", "Associate"),
-        ("Bachelors", "Bachelors"),
-        ("PHD", "Phd"),
-        ("DOCTORS", "Doctor"),
-        ("LAWYER", "Lawyer"),
-    )
-    education = models.CharField(education_options, max_length=35)
-
+    job_status = models.CharField(max_length=50, choices=constants.JOB_STATUS_OPTIONS)
+    education = models.CharField(choices=constants.EDUCATION_OPTIONS, max_length=35)
     affilation_options = (("DFW_PYTHONEERS", "Dfw_Pythoneers"),
                           ("PY_TEXAS", "Py_Texas"),)
-
     affilation = affilation_options
 
 
@@ -236,4 +121,3 @@ class Quote(models.Model):
     Price = models.DecimalField(max_digits=7, decimal_places=2)
 
 # url for vehcile we want to build a vehicle or for this quote 
-

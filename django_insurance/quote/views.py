@@ -1,11 +1,11 @@
 # quote/views.py
 
 from typing import Any
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.http import HttpRequest
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView
 from django.views.generic import TemplateView
-from quote.forms import DriverForm, Customer_Form
+from quote.forms import DriverForm, VehicleForm
 from quote import models
 import random
 
@@ -90,20 +90,34 @@ class HomePageView(TemplateView):
 class AboutPageView(TemplateView):
     template_name = "about.html"
 
-# class DriverView(FormView):
-#     template_name = "driver.html"
+
+def vehicle_form_view(request):
+    quote_id = request.COOKIES.get('quote_id')
+    # TODO handle post request to validate and save data.
+    form = VehicleForm()
+    return render(
+        request,
+        'vehicles.html',
+        {
+            'form': form,
+            'title': 'Vehicle',
+            'quote_id': quote_id,
+        }
+    )
 
 
 def driver_form(request):
+    # TODO should not allow access to this page without a quote id
+    # in order to maintain data integrity
     quote_id = request.COOKIES.get('quote_id')
     if request.method == 'POST':
         form = DriverForm(request.POST)
         print(f'form valid? : {form.is_valid()}')
         if form.is_valid():
-            # form and model are not in sync. NEEDS WORK!
-            print(form.cleaned_data['Usage_Type'])
-            print(f'this is the quote id from the http request: {form.cleaned_data['quote_id']}')
-            # process form data
+            form.quote_id = quote_id
+            print('saving valid driver record')
+            form.save()
+            return redirect('/vehicle')
     form = DriverForm()
     return render(
         request,
@@ -115,10 +129,9 @@ def driver_form(request):
         }
     )
 
+
 def create_quote_id():
-    # Start the string with "d" and "j"
     result = "dj"
-    # Append 6 randomly selected numbers from the range 1 to 10
     for _ in range(6):
         result += str(random.randint(1, 10))
     return result
