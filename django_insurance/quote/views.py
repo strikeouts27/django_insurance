@@ -7,6 +7,7 @@ from django.views.generic.edit import CreateView
 from django.views.generic import TemplateView
 from quote.forms import DriverForm, VehicleForm
 from quote import models
+from django.views.generic.list import ListView
 import random
 
 # need to import views in the urls.py of quote
@@ -31,7 +32,9 @@ class Customer_CreateView(CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return "/driver"
+        return f"/driver/list/{self.quote_id}"
+
+
 
     # we need to utilize the setup() function in createview. we need to add functionality 
     # to setup to create a quote_id for django to know that this quote is for this customer. 
@@ -89,6 +92,20 @@ class HomePageView(TemplateView):
 
 class AboutPageView(TemplateView):
     template_name = "about.html"
+
+
+class DriverListView(ListView):
+    template_name = 'driver-list.html'
+    model = models.Driver
+
+    def setup(self, request: HttpRequest, *args: Any, **kwargs: Any) -> None:
+        self.quote_id = kwargs['quote_id']
+        return super().setup(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context['quote_id'] = self.quote_id
+        return context
 
 
 def vehicle_form_view(request):

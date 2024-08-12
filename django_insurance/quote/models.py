@@ -83,13 +83,13 @@ class Vehicle(models.Model):
 
 
 class Driver(models.Model):
-    driver_first_name = models.CharField(max_length=50)
-    driver_last_name = models.CharField(max_length=50)
-    driver_relation = models.CharField(max_length=16, choices=constants.DRIVER_RELATION_OPTIONS, default="SELF")
+    driver_first_name = models.CharField(max_length=50, null=True)
+    driver_last_name = models.CharField(max_length=50, null=True)
+    driver_relation = models.CharField(max_length=16, choices=constants.DRIVER_RELATION_OPTIONS, default="SELF", null=True)
     quote_id = models.CharField(max_length=8, blank=True)
-    drivers_license_state = models.CharField(choices=constants.STATE_OPTIONS, max_length=30)
-    drivers_license_number = models.CharField(max_length=30)
-    drivers_license_status = models.CharField(choices=constants.DRIVERS_LICENSE_STATUS, max_length=50)
+    drivers_license_state = models.CharField(choices=constants.STATE_OPTIONS, max_length=30, null=True)
+    drivers_license_number = models.CharField(max_length=30, null=True)
+    drivers_license_status = models.CharField(choices=constants.DRIVERS_LICENSE_STATUS, max_length=50, null=True)
     gender = models.CharField(choices=constants.GENDER_OPTIONS, max_length=30)
     date_of_issuance = models.DateField()
     job_status = models.CharField(max_length=50, choices=constants.JOB_STATUS_OPTIONS)
