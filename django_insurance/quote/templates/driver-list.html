@@ -5,4 +5,24 @@
 
 <p>Your quote id is: {{ quote_id }}</p>
 
+<p>Your current drivers are: </p> 
+<table border="1">
+    <th>
+        <td>First Name:  </td>
+        <td>Last Name: </td>
+        <td>Relation: </td>
+        <td>State: </td>
+    </th>
+    {% for driver in driver_list %}
+    <tr>
+        <td>{{ driver.driver_first_name }}</td>
+        <td>{{ driver.driver_last_name }} </td>
+        <td>{{ driver.driver_relation }}</td>
+        <td>{{ driver.drivers_license_state }}</td>
+    </tr>
+    {% endfor %}
+</table> 
+
+<button border="1">Add driver</button>
+
 {% endblock list_content %}

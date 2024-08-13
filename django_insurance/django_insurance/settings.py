@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os 
+
+
+
 # from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,7 +24,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'dfwpythoneers'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -75,26 +78,17 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "django_insurance.wsgi.application"
 
-# TODO Move this to prod or server config file
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql_psycopg2",
-#         "HOST": "localhost",
-#         # "HOST": "aws-0-us-west-1.pooler.supabase.com",
-#         "NAME": "postgres",
-#         "USER": "postgres",
-#         "PASSWORD": "postgres",
-#         # "USER": "postgres.qhvgpdhzebphqnybebkl",
-#         # "PASSWORD": "dfwpythoneers",
-#     }
-# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.environ["database_name"],
+        "USER": os.environ["user"],
+        "PASSWORD": os.environ["password"],
+        "HOST": "127.0.0.1",
+        "PORT": "5432",
     }
 }
-
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
