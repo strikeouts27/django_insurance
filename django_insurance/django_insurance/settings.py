@@ -75,26 +75,17 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "django_insurance.wsgi.application"
 
-# TODO Move this to prod or server config file
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql_psycopg2",
-#         "HOST": "localhost",
-#         # "HOST": "aws-0-us-west-1.pooler.supabase.com",
-#         "NAME": "postgres",
-#         "USER": "postgres",
-#         "PASSWORD": "postgres",
-#         # "USER": "postgres.qhvgpdhzebphqnybebkl",
-#         # "PASSWORD": "dfwpythoneers",
-#     }
-# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "postgres",
+        "USER": "postgres",
+        "PASSWORD": "postgres",
+        "HOST": "127.0.0.1",
+        "PORT": "5432",
     }
 }
-
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 

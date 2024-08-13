@@ -108,6 +108,7 @@ class DriverListView(ListView):
         driver_list = models.Driver.objects.filter(quote_id=self.quote_id)
         context['driver_list'] = driver_list
         return context
+    
 
 
 def vehicle_form_view(request):
