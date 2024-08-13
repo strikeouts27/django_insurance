@@ -82,7 +82,7 @@ WSGI_APPLICATION = "django_insurance.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.environ["database_name"],
+        "NAME": os.environ["name"],
         "USER": os.environ["user"],
         "PASSWORD": os.environ["password"],
         "HOST": "127.0.0.1",
