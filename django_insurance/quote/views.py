@@ -105,6 +105,8 @@ class DriverListView(ListView):
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
         context['quote_id'] = self.quote_id
+        driver_list = models.Driver.objects.filter(quote_id=self.quote_id)
+        context['driver_list'] = driver_list
         return context
 
 
