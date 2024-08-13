@@ -12,9 +12,10 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os 
+from dotenv import load_dotenv 
+load_dotenv()
 
-
-
+SECRET_KEY = os.getenv('SECRET_KEY')
 # from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -82,9 +83,9 @@ WSGI_APPLICATION = "django_insurance.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.environ["name"],
-        "USER": os.environ["user"],
-        "PASSWORD": os.environ["password"],
+        "NAME": os.getenv('NAME'),
+        "USER": os.getenv('USER'),
+        "PASSWORD": os.getenv('PASSWORD'),
         "HOST": "127.0.0.1",
         "PORT": "5432",
     }
