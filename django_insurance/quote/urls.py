@@ -14,7 +14,7 @@ urlpatterns = [
     path("quote/customer/create/", Customer_CreateView.as_view(), name='customer'),
     path("about/", AboutPageView.as_view(), name="about"),
     path("driver/list/<str:quote_id>", DriverListView.as_view(), name="driver_list"),
-    path("driver/", driver_form, name="driver"),
+    path("driver/<str:quote_id>", driver_form, name="driver"),
     path("vehicle/", vehicle_form_view, name="vehicle"),
     path("", HomePageView.as_view(), name='home'),
 ]

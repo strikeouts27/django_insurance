@@ -44,7 +44,7 @@ class Customer_CreateView(CreateView):
         return response
 
     def setup(self, request: HttpRequest, *args: Any, **kwargs: Any) -> None:  
-        current_quote_id = request.COOKIES.get('quote_id', '')
+        current_quote_id = create_quote_id()
         print(f'current_quote_id: {current_quote_id}')
         if not self.quote_id and not current_quote_id:
             self.quote_id = create_quote_id()
@@ -100,15 +100,19 @@ class DriverListView(ListView):
 
     def setup(self, request: HttpRequest, *args: Any, **kwargs: Any) -> None:
         self.quote_id = kwargs['quote_id']
+        print(f"Quote is: {self.quote_id}")
         return super().setup(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
         context['quote_id'] = self.quote_id
+        print(f"context is: {context}")
         driver_list = models.Driver.objects.filter(quote_id=self.quote_id)
         context['driver_list'] = driver_list
+        print(f"context is: {context}")
         return context
     
+
 
 
 def vehicle_form_view(request):
@@ -126,10 +130,13 @@ def vehicle_form_view(request):
     )
 
 
-def driver_form(request):
+def driver_form(request, quote_id):
     # TODO should not allow access to this page without a quote id
     # in order to maintain data integrity
-    quote_id = request.COOKIES.get('quote_id')
+    # quote_id = request.COOKIES.get('quote_id')
+    print(f"Quote id is: {quote_id}")
+    print(f"request method: {request}")
+
     if request.method == 'POST':
         form = DriverForm(request.POST)
         print(f'form valid? : {form.is_valid()}')
@@ -137,10 +144,12 @@ def driver_form(request):
             form.quote_id = quote_id
             print('saving valid driver record')
             form.save()
-            return redirect('/vehicle')
+            print(f"This is the form object printed out \n {form.object}")
+            
+            return redirect(f'/driver/list/{quote_id}')
     form = DriverForm()
     return render(
-        request,
+        request, 
         'driver.html',
         {
             'form': form,

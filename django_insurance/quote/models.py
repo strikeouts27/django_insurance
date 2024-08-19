@@ -21,7 +21,7 @@ class Customer(models.Model):
     zip_code = models.CharField(default=00000, max_length=10)
     telephone_number = models.IntegerField()
     email_address = models.CharField(max_length=50)
-    quote_id = models.CharField(max_length=8, blank=True)
+    quote_id = models.CharField(max_length=11, blank=True)
     home_ownership_options = (("OWN", "Owns_Property"), ("RENT", "Rents_Property"))
     home_ownership = models.CharField(max_length=50, choices=home_ownership_options)
 
@@ -59,7 +59,7 @@ class Vehicle(models.Model):
     Annual_Mileage = models.CharField(choices=Annual_Mileage_Options, max_length=15)
     Year = models.IntegerField()
     Make = models.CharField(max_length=30)
-    quote_id = models.CharField(max_length=8, blank=True)
+    quote_id = models.CharField(max_length=11, blank=True)
     Model = models.CharField(max_length=30)
     
     Ownership_Options = (
@@ -86,7 +86,7 @@ class Driver(models.Model):
     driver_first_name = models.CharField(max_length=50, null=True)
     driver_last_name = models.CharField(max_length=50, null=True)
     driver_relation = models.CharField(max_length=16, choices=constants.DRIVER_RELATION_OPTIONS, default="SELF", null=True)
-    quote_id = models.CharField(max_length=8, blank=True)
+    quote_id = models.CharField(max_length=11, blank=True)
     drivers_license_state = models.CharField(choices=constants.STATE_OPTIONS, max_length=30, null=True)
     drivers_license_number = models.CharField(max_length=30, null=True)
     drivers_license_status = models.CharField(choices=constants.DRIVERS_LICENSE_STATUS, max_length=50, null=True)
