@@ -79,6 +79,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "django_insurance.wsgi.application"
 
+# you must create an .env file and import that env file into settings.py
 
 DATABASES = {
     "default": {

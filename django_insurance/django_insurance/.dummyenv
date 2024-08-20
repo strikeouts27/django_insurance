@@ -1,0 +1,5 @@
+# you need to create values for the items below. 
+SECRET_KEY=<replace_me>
+NAME=<replace_me>
+USER=<replace_me>
+PASSWORD=<replace_me>
