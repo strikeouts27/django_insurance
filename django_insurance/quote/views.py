@@ -34,24 +34,15 @@ class Customer_CreateView(CreateView):
     def get_success_url(self):
         return f"/driver/list/{self.quote_id}"
 
-
-
     # we need to utilize the setup() function in createview. we need to add functionality 
     # to setup to create a quote_id for django to know that this quote is for this customer. 
-    def render_to_response(self, context, **response_kwargs):
-        response = super().render_to_response(context, **response_kwargs)
-        response.set_cookie('quote_id', self.quote_id, max_age=3600)
-        return response
-
     def setup(self, request: HttpRequest, *args: Any, **kwargs: Any) -> None:  
-        current_quote_id = create_quote_id()
-        print(f'current_quote_id: {current_quote_id}')
-        if not self.quote_id and not current_quote_id:
-            self.quote_id = create_quote_id()
+        current_quote_id = request.COOKIES.get('quote_id', '')
+        if current_quote_id:
+            self.quote_id = current_quote_id
             print(f'setting up quote id: {self.quote_id}')
         else:
-            print(f'setting to current_quote_id: {current_quote_id}')
-            self.quote_id = current_quote_id
+            self.quote_id = create_quote_id()
         return super().setup(request, *args, **kwargs)
 
     # each view has its own context
@@ -62,24 +53,11 @@ class Customer_CreateView(CreateView):
         context['title'] = "Customer Page"
         return context
 
+    def render_to_response(self, context, **response_kwargs):
+        response = super().render_to_response(context, **response_kwargs)
+        response.set_cookie('quote_id', self.quote_id, max_age=3600)
+        return response
 
-# class Customer_UpdateView(UpdateView):
-#     model = models.Customer
-#     fields = [
-#         "first_name",
-#         "last_name",
-#         "address",
-#         "zip_code",
-#         "telephone_number",
-#         "email_address",
-#         "date_of_birth",
-#         "home_ownership",
-#     ]
-#     template_name_suffix = "_update_form"
-#     template_name = "customer.html"
-
-#     def get_success_url(self):
-#         return f"/driver"
 
 class HomePageView(TemplateView):
     template_name = "home.html"
@@ -97,6 +75,7 @@ class AboutPageView(TemplateView):
 class DriverListView(ListView):
     template_name = 'driver-list.html'
     model = models.Driver
+    # object_list
 
     def setup(self, request: HttpRequest, *args: Any, **kwargs: Any) -> None:
         self.quote_id = kwargs['quote_id']
@@ -111,8 +90,6 @@ class DriverListView(ListView):
         context['driver_list'] = driver_list
         print(f"context is: {context}")
         return context
-    
-
 
 
 def vehicle_form_view(request):
@@ -140,12 +117,13 @@ def driver_form(request, quote_id):
     if request.method == 'POST':
         form = DriverForm(request.POST)
         print(f'form valid? : {form.is_valid()}')
+        breakpoint()
         if form.is_valid():
             form.quote_id = quote_id
+            breakpoint()
             print('saving valid driver record')
             form.save()
-            print(f"This is the form object printed out \n {form.object}")
-            
+           
             return redirect(f'/driver/list/{quote_id}')
     form = DriverForm()
     return render(
