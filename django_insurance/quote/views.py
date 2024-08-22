@@ -116,18 +116,14 @@ def driver_form(request, quote_id):
 
     if request.method == 'POST':
         form = DriverForm(request.POST)
-        print(f'form valid? : {form.is_valid()}')
-        breakpoint()
         if form.is_valid():
             form.quote_id = quote_id
-            breakpoint()
             print('saving valid driver record')
             form.save()
-           
             return redirect(f'/driver/list/{quote_id}')
     form = DriverForm()
     return render(
-        request, 
+        request,
         'driver.html',
         {
             'form': form,
