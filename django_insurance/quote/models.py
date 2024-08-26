@@ -18,16 +18,16 @@ class Customer(models.Model):
     first_name = models.CharField(max_length=50)
     middle_name = models.CharField(max_length=50, blank=True)
     last_name = models.CharField(max_length=50)
-    suffix = models.CharField(blank=True, max_length=10)
-    apt_number = models.CharField(blank=True, max_length=10)
-    date_of_birth = models.DateField()
     address = models.CharField(max_length=50)
+    phone_number = models.CharField(max_length=10, blank=True)
     zip_code = models.CharField(default=00000, max_length=10)
-    phone_number = CharField(max_length=10)
     email_address = models.CharField(max_length=50)
-    quote_id = models.CharField(max_length=11, blank=True)
+    date_of_birth = models.DateField()
     home_ownership_options = (("OWN", "Owns_Property"), ("RENT", "Rents_Property"))
     home_ownership = models.CharField(max_length=50, choices=home_ownership_options)
+    suffix = models.CharField(blank=True, max_length=10)
+    apt_number = models.CharField(blank=True, max_length=10)
+    quote_id = models.CharField(max_length=11, blank=True)
 
 # vehicle model
 
@@ -122,4 +122,4 @@ class Quote(models.Model):
     Reference_Number = models.CharField(max_length=30)
     Price = models.DecimalField(max_digits=7, decimal_places=2)
 
-# url for vehcile we want to build a vehicle or for this quote 
+# url for vehcile we want to build a vehicle or for this quote
