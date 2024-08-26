@@ -6,8 +6,11 @@ from django.core.exceptions import ValidationError
 
 def validate_phone_numbers(input):
     telephone_numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
-    if not all in telephone_numbers:
-        raise ValidationError("Please input a number from 0 to 9")
+    for iteration in input:
+        if iteration in telephone_numbers:
+            continue
+        else:
+            raise ValidationError("Please input a number from 0 to 9")
 
 
 class Customer_Form(forms.Form):
@@ -29,8 +32,8 @@ class Customer_Form(forms.Form):
     zip_code = forms.IntegerField(label="What is your zip code?")
     # dashes between the number
     
-    telephone_number = forms.CharField(
-        validators=[validate_phone_numbers]
+    phone_number = forms.CharField(
+        validators=[validate_phone_numbers], max_length=10, label="What is your phone number?"
         )
     
     email = forms.EmailField(

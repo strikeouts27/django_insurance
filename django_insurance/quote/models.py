@@ -13,13 +13,6 @@ from django.db import models
 
 # Tie everything with Quote ID
 
-
-def validate_phone(self,value):
-    for character in value:
-        if character not in '0123456789':
-            raise ValidationError(f'Invalid character {character} inputted into phone number field. Only input digits (0-9) are allowed.')
-
-
 class Customer(models.Model):
     # columns would be the variables
     first_name = models.CharField(max_length=50)
@@ -30,7 +23,7 @@ class Customer(models.Model):
     date_of_birth = models.DateField()
     address = models.CharField(max_length=50)
     zip_code = models.CharField(default=00000, max_length=10)
-    telephone_number = CharField(validators=[validate_phone])
+    phone_number = CharField(max_length=10)
     email_address = models.CharField(max_length=50)
     quote_id = models.CharField(max_length=11, blank=True)
     home_ownership_options = (("OWN", "Owns_Property"), ("RENT", "Rents_Property"))
