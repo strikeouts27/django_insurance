@@ -1,13 +1,19 @@
-from django import forms
+from django import forms 
 from quote.models import Driver, Vehicle
 from django.forms import CharField
 from django.core.exceptions import ValidationError
 
 
-def validate_phone_numbers(input):
+
+# strip the characters
+# strip the dashes so its just numbers.
+# make certain that whole digit be converted to a number.
+
+
+def validate_phone_numbers(value):
     telephone_numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
-    for iteration in input:
-        if iteration in telephone_numbers:
+    for i in input:
+        if i in telephone_numbers:
             continue
         else:
             raise ValidationError("Please input a number from 0 to 9")

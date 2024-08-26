@@ -1,12 +1,7 @@
 from django.db import models
 from quote import constants
-from phone_field import PhoneField
+from django.db import models
 from django.forms import CharField
-from django.core import validators
-from django.core.exceptions import ValidationError
-from django import forms
-from django.core.exceptions import ValidationError 
-from django.db import models 
 
 # makemigrations and migrate from manage.py
 # Create your models here.
@@ -85,7 +80,7 @@ class Vehicle(models.Model):
 
 
 class Driver(models.Model):
-    driver_first_name = models.CharField(max_length=50, null=True)
+    driver_first_name = models.CharField(max_length=50, null=True,)
     driver_last_name = models.CharField(max_length=50, null=True)
     driver_relation = models.CharField(max_length=16, choices=constants.DRIVER_RELATION_OPTIONS, default="SELF", null=True)
     quote_id = models.CharField(max_length=11, blank=True)
