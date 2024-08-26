@@ -1,6 +1,7 @@
 # django_insurance/quote/urls.py
 
 from django.urls import path
+
 from quote.views import (
     AboutPageView,
     Customer_CreateView,

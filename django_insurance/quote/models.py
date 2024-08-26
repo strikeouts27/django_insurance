@@ -1,5 +1,12 @@
 from django.db import models
 from quote import constants
+from phone_field import PhoneField
+from django.forms import CharField
+from django.core import validators
+from django.core.exceptions import ValidationError
+from django import forms
+from django.core.exceptions import ValidationError 
+from django.db import models 
 
 # makemigrations and migrate from manage.py
 # Create your models here.
@@ -7,28 +14,30 @@ from quote import constants
 # Tie everything with Quote ID
 
 
-# customer model
+def validate_phone(self,value):
+    for character in value:
+        if character not in '0123456789':
+            raise ValidationError(f'Invalid character {character} inputted into phone number field. Only input digits (0-9) are allowed.')
+
+
 class Customer(models.Model):
     # columns would be the variables
     first_name = models.CharField(max_length=50)
     middle_name = models.CharField(max_length=50, blank=True)
     last_name = models.CharField(max_length=50)
     suffix = models.CharField(blank=True, max_length=10)
-
     apt_number = models.CharField(blank=True, max_length=10)
     date_of_birth = models.DateField()
     address = models.CharField(max_length=50)
     zip_code = models.CharField(default=00000, max_length=10)
-    telephone_number = models.IntegerField()
+    telephone_number = CharField(validators=[validate_phone])
     email_address = models.CharField(max_length=50)
     quote_id = models.CharField(max_length=11, blank=True)
     home_ownership_options = (("OWN", "Owns_Property"), ("RENT", "Rents_Property"))
     home_ownership = models.CharField(max_length=50, choices=home_ownership_options)
 
-
-# credit
 # vehicle model
-#
+
 class Vehicle(models.Model):
     Vehicle_Identification_Number = models.CharField(max_length=30)
     # Enumerate Technique The first item in the tuple is what will be listed in the database.

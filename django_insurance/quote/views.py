@@ -9,8 +9,12 @@ from quote.forms import DriverForm, VehicleForm
 from quote import models
 from django.views.generic.list import ListView
 import random
+from django.core import validators
+from django.forms import CharField 
+
 
 # need to import views in the urls.py of quote
+
 
 class Customer_CreateView(CreateView):
     quote_id: str = None
