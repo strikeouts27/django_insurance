@@ -1,5 +1,22 @@
-from django import forms
+from django import forms 
 from quote.models import Driver, Vehicle
+from django.forms import CharField
+from django.core.exceptions import ValidationError
+
+
+
+# strip the characters
+# strip the dashes so its just numbers.
+# make certain that whole digit be converted to a number.
+
+
+def validate_phone_numbers(value):
+    telephone_numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+    for i in input:
+        if i in telephone_numbers:
+            continue
+        else:
+            raise ValidationError("Please input a number from 0 to 9")
 
 
 class Customer_Form(forms.Form):
@@ -15,14 +32,16 @@ class Customer_Form(forms.Form):
     suffix = forms.CharField(
         max_length=5, label="If you have a suffix in your name what is it?", required=False
     )
-    address = forms.CharField(
+    address = forms.CharField( 
         max_length=50, label="What is your address?", required=True
     )
     zip_code = forms.IntegerField(label="What is your zip code?")
     # dashes between the number
-    telephone_number = forms.IntegerField(
-        required=True, label="What is your phone number?"
-    )
+    
+    phone_number = forms.CharField(
+        validators=[validate_phone_numbers], max_length=10, label="What is your phone number?"
+        )
+    
     email = forms.EmailField(
         max_length=50, required=False, label="What is your email address?"
     )

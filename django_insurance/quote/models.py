@@ -1,34 +1,31 @@
 from django.db import models
 from quote import constants
+from django.db import models
+from django.forms import CharField
 
 # makemigrations and migrate from manage.py
 # Create your models here.
 
 # Tie everything with Quote ID
 
-
-# customer model
 class Customer(models.Model):
     # columns would be the variables
     first_name = models.CharField(max_length=50)
     middle_name = models.CharField(max_length=50, blank=True)
     last_name = models.CharField(max_length=50)
-    suffix = models.CharField(blank=True, max_length=10)
-
-    apt_number = models.CharField(blank=True, max_length=10)
-    date_of_birth = models.DateField()
     address = models.CharField(max_length=50)
+    phone_number = models.CharField(max_length=10, blank=True)
     zip_code = models.CharField(default=00000, max_length=10)
-    telephone_number = models.IntegerField()
     email_address = models.CharField(max_length=50)
-    quote_id = models.CharField(max_length=11, blank=True)
+    date_of_birth = models.DateField()
     home_ownership_options = (("OWN", "Owns_Property"), ("RENT", "Rents_Property"))
     home_ownership = models.CharField(max_length=50, choices=home_ownership_options)
+    suffix = models.CharField(blank=True, max_length=10)
+    apt_number = models.CharField(blank=True, max_length=10)
+    quote_id = models.CharField(max_length=11, blank=True)
 
-
-# credit
 # vehicle model
-#
+
 class Vehicle(models.Model):
     Vehicle_Identification_Number = models.CharField(max_length=30)
     # Enumerate Technique The first item in the tuple is what will be listed in the database.
@@ -83,7 +80,7 @@ class Vehicle(models.Model):
 
 
 class Driver(models.Model):
-    driver_first_name = models.CharField(max_length=50, null=True)
+    driver_first_name = models.CharField(max_length=50, null=True,)
     driver_last_name = models.CharField(max_length=50, null=True)
     driver_relation = models.CharField(max_length=16, choices=constants.DRIVER_RELATION_OPTIONS, default="SELF", null=True)
     quote_id = models.CharField(max_length=11, blank=True)
@@ -120,4 +117,4 @@ class Quote(models.Model):
     Reference_Number = models.CharField(max_length=30)
     Price = models.DecimalField(max_digits=7, decimal_places=2)
 
-# url for vehcile we want to build a vehicle or for this quote 
+# url for vehcile we want to build a vehicle or for this quote

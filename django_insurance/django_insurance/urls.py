@@ -19,7 +19,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include, re_path
 from django.views.generic import TemplateView
- 
+
+
+MIDDLEWARE = [
+    
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
+
+]
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
 
 urlpatterns = [
     path("admin/", admin.site.urls),

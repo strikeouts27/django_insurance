@@ -1,0 +1,9 @@
+Django To do List 
+
+Python Logs 
+Developer Tools Tutorial 
+Understand Cookies See Python Tutorial in Website Project 
+Layout Charts for Database 
+Startup Log 
+Start writing the readme
+Docker Tutorial - Last Case 

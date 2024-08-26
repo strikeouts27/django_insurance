@@ -11,11 +11,12 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-import os 
-from dotenv import load_dotenv 
+import os
+from dotenv import load_dotenv
+
 load_dotenv()
 
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = os.getenv("SECRET_KEY")
 # from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -30,13 +31,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '.ngrok-free.app',
-    'insurance.eddyizm.com',
-    'localhost',
-    '127.0.0.1',
+    ".ngrok-free.app",
+    "insurance.eddyizm.com",
+    "localhost",
+    "127.0.0.1",
 ]
 # ngrok only for developing
-CSRF_TRUSTED_ORIGINS = ['https://*.ngrok-free.app', 'https://insurance.eddyizm.com']
+CSRF_TRUSTED_ORIGINS = ["https://*.ngrok-free.app", "https://insurance.eddyizm.com"]
 
 # Application definition
 INSTALLED_APPS = [
@@ -84,9 +85,9 @@ WSGI_APPLICATION = "django_insurance.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv('NAME'),
-        "USER": os.getenv('USER'),
-        "PASSWORD": os.getenv('PASSWORD'),
+        "NAME": os.getenv("NAME"),
+        "USER": os.getenv("USER"),
+        "PASSWORD": os.getenv("PASSWORD"),
         "HOST": "127.0.0.1",
         "PORT": "5432",
     }
@@ -126,7 +127,7 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
-# added by Andrew Chat GPT to serve static folders. 
+# added by Andrew Chat GPT to serve static folders.
 STATICFILE_DIRS = [BASE_DIR / "static"]
 
 # Default primary key field type

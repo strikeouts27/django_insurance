@@ -9,8 +9,14 @@ from quote.forms import DriverForm, VehicleForm
 from quote import models
 from django.views.generic.list import ListView
 import random
+from django.forms import CharField 
+
+
 
 # need to import views in the urls.py of quote
+
+# class RegexValidator(regex=None, message=None, code=None, inverse_match=None, flags=0)[source]
+    
 
 class Customer_CreateView(CreateView):
     quote_id: str = None
@@ -19,7 +25,7 @@ class Customer_CreateView(CreateView):
         "first_name",
         "last_name",
         "address",
-        "telephone_number",
+        "phone_number",
         "zip_code",
         "email_address",
         "date_of_birth",

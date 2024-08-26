@@ -1,9 +1,12 @@
-{% extends "base.html" %} {% block page_content %}
+{% extends "base.html" %} 
+
+{% block page_content %}
 <!-- start driver form -->
 <div class="hero-body has-text-centered">
     <p>Your quote id is: {{ quote_id }}</p>
     <form method="post">
         {% csrf_token %} {{ form.as_p }}
+
         <input
             class="button is-light"
             type="submit"
