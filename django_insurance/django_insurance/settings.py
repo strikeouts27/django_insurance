@@ -15,7 +15,8 @@ import os
 from dotenv import load_dotenv 
 load_dotenv()
 
-SECRET_KEY = os.getenv('SECRET_KEY')
+# SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = 'dfwpythoneers'
 # from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -47,6 +48,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "quote",
+    "phonenumber_field",
 ]
 
 MIDDLEWARE = [
@@ -79,8 +81,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "django_insurance.wsgi.application"
 
-# you must create an .env file and import that env file into settings.py
-
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
@@ -91,6 +91,7 @@ DATABASES = {
         "PORT": "5432",
     }
 }
+
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
