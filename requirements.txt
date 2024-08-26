@@ -1,4 +1,6 @@
 asgiref==3.8.1
+django-phonenumber-field==8.0.0
+phonenumberslite==8.13.43
 Django==5.0.7
 django-crispy-forms==2.3
 django-dotenv==1.4.2

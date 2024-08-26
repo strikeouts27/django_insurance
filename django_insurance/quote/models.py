@@ -1,13 +1,12 @@
 from django.db import models
 from quote import constants
-
+from phonenumber_field.modelfields import PhoneNumberField
 # makemigrations and migrate from manage.py
 # Create your models here.
 
 # Tie everything with Quote ID
 
 
-# customer model
 class Customer(models.Model):
     # columns would be the variables
     first_name = models.CharField(max_length=50)
@@ -19,7 +18,7 @@ class Customer(models.Model):
     date_of_birth = models.DateField()
     address = models.CharField(max_length=50)
     zip_code = models.CharField(default=00000, max_length=10)
-    telephone_number = models.IntegerField()
+    phone_number = PhoneNumberField(region="US", blank=False)
     email_address = models.CharField(max_length=50)
     quote_id = models.CharField(max_length=11, blank=True)
     home_ownership_options = (("OWN", "Owns_Property"), ("RENT", "Rents_Property"))
@@ -119,5 +118,3 @@ class Quote(models.Model):
     Driver = models.ForeignKey(Driver, on_delete=models.CASCADE)
     Reference_Number = models.CharField(max_length=30)
     Price = models.DecimalField(max_digits=7, decimal_places=2)
-
-# url for vehcile we want to build a vehicle or for this quote 

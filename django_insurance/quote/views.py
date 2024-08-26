@@ -19,7 +19,7 @@ class Customer_CreateView(CreateView):
         "first_name",
         "last_name",
         "address",
-        "telephone_number",
+        "phone_number",
         "zip_code",
         "email_address",
         "date_of_birth",
