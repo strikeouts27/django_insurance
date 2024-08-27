@@ -16,76 +16,76 @@ from django.forms import CharField
 # class RegexValidator(regex=None, message=None, code=None, inverse_match=None, flags=0)[source]
 
 
-class Customer_CreateView(CreateView):
-    quote_id: str = None
-    model = models.Customer
-    fields = [
-        "first_name",
-        "last_name",
-        "address",
-        "phone_number",
-        "zip_code",
-        "email_address",
-        "date_of_birth",
-        "home_ownership"
-    ]
-    template_name = "customer.html"
-
-    def form_valid(self, form):
-        form.instance.quote_id = self.quote_id
-        return super().form_valid(form)
-
-    def get_success_url(self):
-        return f"/driver/list/{self.quote_id}"
-
-    # we need to utilize the setup() function in createview. we need to add functionality
-    # to setup to create a quote_id for django to know that this quote is for this customer.
-    def setup(self, request: HttpRequest, *args: Any, **kwargs: Any) -> None:
-        current_quote_id = request.COOKIES.get('quote_id', '')
-        if current_quote_id:
-            self.quote_id = current_quote_id
-            print(f'setting up quote id: {self.quote_id}')
-        else:
-            self.quote_id = create_quote_id()
-        return super().setup(request, *args, **kwargs)
-
-    # each view has its own context
-    # in order to change context in django we need the get_context function
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['quote_id'] = self.quote_id
-        context['title'] = "Customer Page"
-        return context
-
-    def render_to_response(self, context, **response_kwargs):
-        response = super().render_to_response(context, **response_kwargs)
-        response.set_cookie('quote_id', self.quote_id, max_age=3600)
-        return response
-
-
 """ 
-I want to create a function where the user clicks on the get quote button and that tells django to load the custoemr form to disaply
-and for the user to fill out. The quote ID must come with it.
-
-urls.py-> path("quote/customer/create/", Customer_CreateView.as_view(), name='customer'),
-views.py needs to take in a request and a quote id 
-template being used 
+I want the user to click start quote. I than want http://127.0.0.1:8000/quote/customer/create/ to load in the url. 
+I want the website to check and see if this is a new quote or not. If it is a new quote, I want a new quote id generated.
+If it is not a new quote, I want it to retrieve the quote id of the user. 
 
 """
-def customer_form_view(request, quote_id):
-    quote_id = request.COOKIES.get("quote_id")
-    form = Customer_Form()
-    render(
-        request,
-        "customer.html",
-        {
-            "form": form,
-            "title": "Customer",
-            "quote_id": quote_id,
-        },
-    )
-    return render(request)
+# customer model
+# class Customer_CreateView(CreateView):
+#     quote_id: str = None
+#     model = models.Customer
+#     form_class = Customer_Form
+#     template_name = "customer.html"
 
+#     def form_valid(self, form):
+#         form.instance.quote_id = self.quote_id
+#         return super().form_valid(form)
+
+#     def get_success_url(self):
+#         return f"/driver/list/{self.quote_id}"
+
+#     # we need to utilize the setup() function in createview. we need to add functionality
+#     # to setup to create a quote_id for django to know that this quote is for this customer.
+
+#     def setup(self, request: HttpRequest, *args: Any, **kwargs: Any) -> None:
+#         current_quote_id = request.COOKIES.get("quote_id", "")
+#         if current_quote_id:
+#             self.quote_id = current_quote_id
+#             print(f"setting up quote id: {self.quote_id}")
+#         else:
+#             self.quote_id = create_quote_id()
+#         return super().setup(request, *args, **kwargs)
+
+#     # each view has its own context
+#     # in order to change context in django we need the get_context function
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context["quote_id"] = self.quote_id
+#         context["title"] = "Customer Page"
+#         return context
+
+#     def render_to_response(self, context, **response_kwargs):
+#         response = super().render_to_response(context, **response_kwargs)
+#         response.set_cookie("quote_id", self.quote_id, max_age=3600)
+#         return response
+
+
+def customer_form_view(request, quote_id):
+    if quote_id == None:  
+        quote_id = create_quote_id()
+    
+    else: 
+        quote_id = request.COOKIES.get('quote_id')
+
+    if request.method == 'POST':
+        form = Customer_Form(request.POST)
+        quote_id = request.COOKIES.get("quote_id")
+        if form.is_valid():
+            return redirect("driver/list/<str:quote_id>")
+    else:
+        form = Customer_Form()
+    
+    return render(
+        request,
+        'customer.html',
+        {
+            'form': form, 
+            'title' : 'Customer Form', 
+            'quote_id' : request.COOKIES.get('quote_id'), 
+        }
+    )
 
 class HomePageView(TemplateView):
     template_name = "home.html"
