@@ -12,7 +12,7 @@ from django.core.exceptions import ValidationError
 
 def validate_phone_numbers(value):
     telephone_numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
-    for i in input:
+    for i in value:
         if i in telephone_numbers:
             continue
         else:

@@ -5,18 +5,16 @@ from django.shortcuts import redirect, render
 from django.http import HttpRequest
 from django.views.generic.edit import CreateView
 from django.views.generic import TemplateView
-from quote.forms import DriverForm, VehicleForm
+from quote.forms import Customer_Form, DriverForm, VehicleForm
 from quote import models
 from django.views.generic.list import ListView
 import random
 from django.forms import CharField 
 
-
-
 # need to import views in the urls.py of quote
 
 # class RegexValidator(regex=None, message=None, code=None, inverse_match=None, flags=0)[source]
-    
+
 
 class Customer_CreateView(CreateView):
     quote_id: str = None
@@ -40,9 +38,9 @@ class Customer_CreateView(CreateView):
     def get_success_url(self):
         return f"/driver/list/{self.quote_id}"
 
-    # we need to utilize the setup() function in createview. we need to add functionality 
-    # to setup to create a quote_id for django to know that this quote is for this customer. 
-    def setup(self, request: HttpRequest, *args: Any, **kwargs: Any) -> None:  
+    # we need to utilize the setup() function in createview. we need to add functionality
+    # to setup to create a quote_id for django to know that this quote is for this customer.
+    def setup(self, request: HttpRequest, *args: Any, **kwargs: Any) -> None:
         current_quote_id = request.COOKIES.get('quote_id', '')
         if current_quote_id:
             self.quote_id = current_quote_id
@@ -52,7 +50,7 @@ class Customer_CreateView(CreateView):
         return super().setup(request, *args, **kwargs)
 
     # each view has its own context
-    # in order to change context in django we need the get_context function 
+    # in order to change context in django we need the get_context function
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['quote_id'] = self.quote_id
@@ -63,6 +61,30 @@ class Customer_CreateView(CreateView):
         response = super().render_to_response(context, **response_kwargs)
         response.set_cookie('quote_id', self.quote_id, max_age=3600)
         return response
+
+
+""" 
+I want to create a function where the user clicks on the get quote button and that tells django to load the custoemr form to disaply
+and for the user to fill out. The quote ID must come with it.
+
+urls.py-> path("quote/customer/create/", Customer_CreateView.as_view(), name='customer'),
+views.py needs to take in a request and a quote id 
+template being used 
+
+"""
+def customer_form_view(request, quote_id):
+    quote_id = request.COOKIES.get("quote_id")
+    form = Customer_Form()
+    render(
+        request,
+        "customer.html",
+        {
+            "form": form,
+            "title": "Customer",
+            "quote_id": quote_id,
+        },
+    )
+    return render(request)
 
 
 class HomePageView(TemplateView):
@@ -123,14 +145,12 @@ def driver_form(request, quote_id):
     if request.method == 'POST':
         form = DriverForm(request.POST)
         print(f'form valid? : {form.is_valid()}')
-        breakpoint()
         if form.is_valid():
-            form.quote_id = quote_id
-            breakpoint()
-            print('saving valid driver record')
-            form.save()
+            driver = form.save(commit=False)
+            driver.quote_id = quote_id
+            driver.save()
+            return redirect('f/driver/list{quote_id}')
            
-            return redirect(f'/driver/list/{quote_id}')
     form = DriverForm()
     return render(
         request, 
